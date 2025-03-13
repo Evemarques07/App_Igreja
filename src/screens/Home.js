@@ -23,7 +23,6 @@ const Home = ({ route }) => {
   let decodedToken = null;
   try {
     if (token && token.access_token) {
-      // Verifica se o token e o access_token existem
       decodedToken = jwtDecode(token.access_token);
     } else {
       console.warn("Token inválido ou ausente.");
