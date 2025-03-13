@@ -20,7 +20,6 @@ const HomeContent = ({ token }) => {
 
 const Home = ({ route }) => {
   const { token } = route.params;
-  console.log("Token recebido em Home:", token); // Adicione este log
   let decodedToken = null;
   try {
     if (token && token.access_token) {

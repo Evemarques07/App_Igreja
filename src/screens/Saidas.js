@@ -23,9 +23,6 @@ const Saidas = ({ route }) => {
     setShowList(false);
 
     try {
-      console.log("Iniciando requisição para /saidas/...");
-      console.log("Token antes da requisição:", token);
-
       const response = await api.get(`/saidas/`, {
         headers: { Authorization: `Bearer ${token.access_token}` },
       });

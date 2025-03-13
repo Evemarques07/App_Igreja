@@ -23,8 +23,6 @@ const Contributions = ({ route }) => {
     setShowList(false);
 
     try {
-      console.log("Iniciando requisição para /entradas/me/...");
-      console.log("Token antes da requisição:", token);
       const response = await api.get(`/entradas/me/`, {
         headers: { Authorization: `Bearer ${token.access_token}` },
       });
