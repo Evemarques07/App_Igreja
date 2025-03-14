@@ -12,7 +12,7 @@ import { jwtDecode } from "jwt-decode";
 import api from "../services/api";
 
 const ChangeUsername = ({ route, navigation }) => {
-  const { token } = route.params;
+  const { token, refreshCapitalizedName } = route.params;
 
   let decodedToken;
   let idMembro;
@@ -22,8 +22,6 @@ const ChangeUsername = ({ route, navigation }) => {
     idMembro = decodedToken ? decodedToken.idMembro : null;
   } catch (error) {
     console.error("Erro ao decodificar o token:", error);
-    setModalMessage("Erro ao obter informações do usuário.");
-    setModalVisible(true);
     navigation.goBack();
     return null;
   }
@@ -36,9 +34,17 @@ const ChangeUsername = ({ route, navigation }) => {
   const handleChangeUsername = async () => {
     setLoading(true);
 
+    const trimmedUsername = newUsername.trim(); // Remove espaços antes e depois
+
+    if (!trimmedUsername) {
+      setModalMessage("O nome de usuário não pode estar vazio.");
+      setModalVisible(true);
+      setLoading(false);
+      return;
+    }
+
     const idMembroInt = parseInt(idMembro, 10);
     if (isNaN(idMembroInt)) {
-      console.error("Erro: idMembro não é um número válido!", idMembro);
       setModalMessage("ID do membro inválido.");
       setModalVisible(true);
       setLoading(false);
@@ -48,13 +54,17 @@ const ChangeUsername = ({ route, navigation }) => {
     try {
       const response = await api.patch(
         `/usuarios/${idMembroInt}`,
-        { login: newUsername },
+        { login: trimmedUsername },
         { headers: { Authorization: `Bearer ${token.access_token}` } }
       );
 
       if (response.status === 200) {
         setModalMessage("Nome de usuário alterado com sucesso!");
         setModalVisible(true);
+
+        if (refreshCapitalizedName) {
+          refreshCapitalizedName();
+        }
       } else {
         throw new Error("Erro ao alterar o nome de usuário");
       }

@@ -17,9 +17,9 @@ const CustomDrawerContent = (props) => {
       <View style={styles.drawerHeader}>
         <Text style={styles.drawerHeaderText}>Menu</Text>
       </View>
-      {/* <DrawerItemList {...props} /> */}
+      <DrawerItemList {...props} />
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.drawerItem}
         component={TabNavigator}
         onPress={() => {
@@ -47,7 +47,7 @@ const CustomDrawerContent = (props) => {
         }}
       >
         <Text style={styles.drawerItemText}>Sair</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </DrawerContentScrollView>
   );
 };

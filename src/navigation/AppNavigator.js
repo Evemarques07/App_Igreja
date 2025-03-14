@@ -13,6 +13,7 @@ import MonthSelection from "../screens/MonthSelection";
 import Saidas from "../screens/Saidas";
 import ChangePassword from "../screens/ChangePassword";
 import ChangeUsername from "../screens/ChangeUsername";
+import Avisos from "../screens/Avisos";
 
 const Stack = createNativeStackNavigator();
 
@@ -68,6 +69,11 @@ const AppNavigator = () => {
         <Stack.Screen
           name="ChangeUsername"
           component={ChangeUsername}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Avisos"
+          component={Avisos}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
